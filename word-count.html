@@ -1,0 +1,117 @@
+<html>
+<style>
+    h1{
+        margin-top: 50px;
+        text-align: center;
+        color: dimgrey;
+    }
+    
+    #text-input{
+        border: 1px solid dimgrey; 
+        margin-left: auto;
+        margin-right: auto;
+        width:540px;
+        height: 180px;
+        resize: none;
+    }
+    
+    #text-button{
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80px;
+        height: 30px;
+        border: 1px solid dimgrey; 
+        background-color: dimgrey;
+        border-radius: 2px;
+    }
+    
+    #text-button-style{
+        font-size: 18px;
+        color: white;
+        width: 80px;
+        height: 30px;
+        border: 1px solid dimgrey;
+        background-color: dimgrey;
+    }
+</style>
+    
+    <h1>Word Count</h1>
+    <div id="text-input">
+        <textarea rows="5" cols="50" id="text-input"></textarea>
+    </div>
+    <div id="text-button">
+        <button id="text-button-style" onclick="countWords()">Count</button>
+    </div>
+    
+    <p id="text-label"></p>
+    
+    <script> 
+        
+        function countWords(){
+            var re = /[\.,\!\*;:=\_`~'?"\s]/gi; 
+//            /\s+/gi;
+            
+            var str1 = document.getElementById("text-input").value;  //get the value of textarea
+            
+            var str2 = str1.replace(re,' ').toLowerCase();     //replace marks to ' ' and convert to lower case
+           
+            var str3 = str2.split(' ').sort();     // split the str by ' ' and sort it alphabetically
+            
+            var result = {};    // store word-count object
+            
+            var dictionary = [];    // store words.
+            
+            var sortedResult = [];
+            
+            for(var i=0; i<str3.length; i++){       // count each word and appearence.
+                
+                var currentWord = str3[i];
+                var wordCount = 0;
+                
+                if(!result[currentWord]){       //if not exist, put in result and dictionary
+                    wordCount = 1;
+                    dictionary.push(currentWord);
+                    result[currentWord] = wordCount;
+                    console.log(currentWord + " : " +result[currentWord]);
+                } else if(result[currentWord]){      // if exist before, increment wordCount
+                    result[currentWord]++;
+                    console.log(currentWord + " : " +result[currentWord]);
+                }
+            }
+            
+            var wordPair = "";
+            
+            for(var i=0; i<dictionary.length; i++){
+                if(dictionary[i]){
+                    wordPair += dictionary[i] + " : " + result[dictionary[i]] + '<br>';
+                    sortedResult.push({'word':dictionary[i],'count':result[dictionary[i]]});
+                };
+            }   
+//            console.log(sortedResult);
+            
+            sortedResult.sort(function(a,b){
+                if(a.count < b.count) {
+                    return 1;
+                }
+                 if(a.count > b.count) {
+                    return -1;
+                }
+                return 0;
+            });
+            
+//            console.log(sortedResult);
+            
+            var sortedResultPair="";
+            
+            for(var i=0;i<sortedResult.length;i++){
+                sortedResultPair += sortedResult[i].word + " : " + sortedResult[i].count + '<br>';
+//                console.log(sortedResult[i].word);
+//                console.log(sortedResult[i].count);
+            }
+            
+            document.getElementById('text-label').innerHTML = sortedResultPair;
+        } 
+    </script>
+    
+</html>
