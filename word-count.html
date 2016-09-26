@@ -6,13 +6,22 @@
         color: dimgrey;
     }
     
+    #text-input-div{
+        border: 1px solid dimgrey; 
+        margin-left: auto;
+        margin-right: auto;
+        width:540px;
+        height: 180px;
+    }
+    
     #text-input{
         border: 1px solid dimgrey; 
         margin-left: auto;
         margin-right: auto;
         width:540px;
         height: 180px;
-        resize: none;
+        resize: none; 
+        border-radius: 10px;
     }
     
     #text-button{
@@ -34,10 +43,17 @@
         border: 1px solid dimgrey;
         background-color: dimgrey;
     }
+    
+    #text-label{
+        width:300px;
+        height: 200px;
+        margin:20px auto;
+    }
 </style>
     
+    
     <h1>Word Count</h1>
-    <div id="text-input">
+    <div id="text-input-div">
         <textarea rows="5" cols="50" id="text-input"></textarea>
     </div>
     <div id="text-button">
